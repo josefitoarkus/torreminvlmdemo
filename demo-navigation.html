@@ -330,6 +330,34 @@
             color: #404040;
         }
 
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(14, 165, 233, 0.1);
+            border-top: 8px solid #0EA5E9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #737373;
+            font-weight: 300;
+        }
+
         .notes-section {
             background: rgba(251, 191, 36, 0.1);
             border: 1px solid rgba(251, 191, 36, 0.2);
@@ -792,22 +820,48 @@
 
             const previewContainer = document.getElementById('screenPreview');
 
-            // Create screen info and image
+            // Show loading spinner immediately
             previewContainer.innerHTML = `
                 <div class="screen-info">
                     <div class="screen-name">${screenName}</div>
                     <div class="screen-id-display">${screenId}</div>
                 </div>
-                <img src="screenshots/${screenId}.png"
-                     alt="${screenName}"
-                     class="screen-preview"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="placeholder-screen" style="display:none;">
-                    <div class="placeholder-icon">🖼️</div>
-                    <div class="placeholder-text">Screen preview unavailable</div>
-                    <div class="placeholder-subtext">ID: ${screenId}</div>
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">Loading screen...</div>
                 </div>
             `;
+
+            // Create image and load it
+            const img = new Image();
+
+            img.onload = function() {
+                previewContainer.innerHTML = `
+                    <div class="screen-info">
+                        <div class="screen-name">${screenName}</div>
+                        <div class="screen-id-display">${screenId}</div>
+                    </div>
+                    <img src="screenshots/${screenId}.png"
+                         alt="${screenName}"
+                         class="screen-preview">
+                `;
+            };
+
+            img.onerror = function() {
+                previewContainer.innerHTML = `
+                    <div class="screen-info">
+                        <div class="screen-name">${screenName}</div>
+                        <div class="screen-id-display">${screenId}</div>
+                    </div>
+                    <div class="placeholder-screen">
+                        <div class="placeholder-icon">🖼️</div>
+                        <div class="placeholder-text">Screen preview unavailable</div>
+                        <div class="placeholder-subtext">ID: ${screenId}</div>
+                    </div>
+                `;
+            };
+
+            img.src = `screenshots/${screenId}.png`;
         }
 
         // Initialize all flows as expanded
