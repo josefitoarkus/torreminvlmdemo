@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torre Mind VLMS - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(ellipse at center 30%, #0B1628 0%, #070B14 60%, #050811 100%);
+            color: #E5E5E5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Left Panel - Flow Navigation */
+        .left-panel {
+            width: 45%;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 40px 30px;
+            border-right: 1px solid #1A2332;
+        }
+
+        /* Right Panel - Screen Preview */
+        .right-panel {
+            width: 55%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: radial-gradient(ellipse at center top, #0D1520 0%, #070B14 60%);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1A2332;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 200;
+            color: #0EA5E9;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #737373;
+            font-weight: 300;
+        }
+
+        .flow-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-section:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .flow-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .flow-badge {
+            background: #0EA5E9;
+            color: #0B1628;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .flow-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #FFFFFF;
+            flex: 1;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .status-complete {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-partial {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FBBf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .expand-toggle {
+            background: none;
+            border: none;
+            color: #737373;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-toggle.expanded {
+            transform: rotate(180deg);
+        }
+
+        .flow-description {
+            color: #A3A3A3;
+            font-size: 13px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .screen-sequence {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .screen-sequence.collapsed {
+            display: none;
+        }
+
+        .screen-step {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #1A2332;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .screen-step:hover {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: #0EA5E9;
+            transform: translateX(4px);
+        }
+
+        .screen-step.active {
+            background: rgba(14, 165, 233, 0.15);
+            border-color: #0EA5E9;
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+        }
+
+        .step-number {
+            background: #1A2332;
+            color: #0EA5E9;
+            font-weight: 600;
+            font-size: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #E5E5E5;
+            margin-bottom: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .step-description {
+            font-size: 12px;
+            color: #737373;
+        }
+
+        .step-meta {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .screen-type {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-dashboard {
+            background: rgba(139, 92, 246, 0.15);
+            color: #8B5CF6;
+        }
+
+        .type-kiosk {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0EA5E9;
+        }
+
+        .type-whatsapp {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+        }
+
+        .status-icon {
+            font-size: 14px;
+        }
+
+        .missing-screen {
+            opacity: 0.6;
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .missing-screen:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Screen Preview Styles */
+        .screen-preview-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .screen-name {
+            font-size: 24px;
+            font-weight: 300;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .screen-id-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #737373;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .screen-preview {
+            max-width: 100%;
+            max-height: calc(100vh - 200px);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+        }
+
+        .placeholder-screen {
+            width: 600px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed #1A2332;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .placeholder-icon {
+            font-size: 64px;
+            color: #1A2332;
+        }
+
+        .placeholder-text {
+            font-size: 18px;
+            color: #525252;
+            font-weight: 300;
+        }
+
+        .placeholder-subtext {
+            font-size: 14px;
+            color: #404040;
+        }
+
+        .notes-section {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .notes-title {
+            color: #FBBf24;
+            font-weight: 600;
+            font-size: 11px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notes-content {
+            color: #D4D4D4;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Scrollbar Styling */
+        .left-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .left-panel::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .left-panel::-webkit-scrollbar-thumb {
+            background: #1A2332;
+            border-radius: 4px;
+        }
+
+        .left-panel::-webkit-scrollbar-thumb:hover {
+            background: #2A3342;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-panel, .right-panel {
+                width: 100%;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Panel: Flow Navigation -->
+        <div class="left-panel">
+            <header>
+                <h1>Torre Mind VLMS Demo</h1>
+                <p class="subtitle">Click any step to preview screen</p>
+            </header>
+
+            <!-- Flow A -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowA')">
+                    <span class="flow-badge">FLOW A</span>
+                    <h2 class="flow-title">Pre-Registered Visitor</h2>
+                    <span class="status-badge status-complete">✓</span>
+                    <button class="expand-toggle" id="toggleA">▼</button>
+                </div>
+                <p class="flow-description">
+                    Gold-standard experience for scheduled meetings. Tenant invites via WhatsApp, visitor receives QR code, arrives and checks in seamlessly.
+                </p>
+                <div class="screen-sequence" id="flowA">
+                    <div class="screen-step" onclick="showScreen('2ZfZA', 'Case: Tenant Registers a Guest', 'whatsapp', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Tenant Registers a Guest</div>
+                            <div class="step-description">Tenant initiates invitation via WhatsApp</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('Dts7e', 'Pre-Registered Visitor QR Invitation', 'whatsapp', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Visitor Receives QR Invitation</div>
+                            <div class="step-description">System sends visitor WhatsApp with QR code</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('fBy7S', 'Lobby - QR Scan', 'kiosk', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Visitor Scans QR</div>
+                            <div class="step-description">Visitor scans QR at entrance</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('UY36a', 'QR Scan Confirmation', 'whatsapp', this)">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Confirmation via WhatsApp</div>
+                            <div class="step-description">System confirms scan via WhatsApp</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                        <span class="step-number">5</span>
+                        <div class="step-content">
+                            <div class="step-title">Dashboard Updates</div>
+                            <div class="step-description">Staff dashboard shows visitor arrival</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Lobby - Badge Confirmation', 'kiosk', this)">
+                        <span class="step-number">6</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Issued</div>
+                            <div class="step-description">Badge/pass confirmation shown to visitor</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('huHVL', 'Host Approval', 'whatsapp', this)">
+                        <span class="step-number">7</span>
+                        <div class="step-content">
+                            <div class="step-title">Host Notification</div>
+                            <div class="step-description">Host receives WhatsApp with action buttons</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow B -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowB')">
+                    <span class="flow-badge">FLOW B</span>
+                    <h2 class="flow-title">Walk-In Visitor</h2>
+                    <span class="status-badge status-complete">✓</span>
+                    <button class="expand-toggle" id="toggleB">▼</button>
+                </div>
+                <p class="flow-description">
+                    Handles visitors arriving without prior arrangement. Staff manually registers and notifies host.
+                </p>
+                <div class="screen-sequence" id="flowB">
+                    <div class="screen-step" onclick="showScreen('2lIF7', 'Lobby - Welcome', 'kiosk', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Visitor Arrives</div>
+                            <div class="step-description">Visitor arrives at lobby</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('3d2hE', 'Check-In Form', 'dashboard', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Staff Opens Check-In</div>
+                            <div class="step-description">Staff opens check-in interface</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('4YA2p', 'Frequent Visitor Search', 'kiosk', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Search Visitor</div>
+                            <div class="step-description">Staff searches for returning visitor</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('FJEZG', 'Method Selection', 'kiosk', this)">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Select Visitor Type</div>
+                            <div class="step-description">Staff selects visitor type</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('hR4jr', 'Visitor Info Entry', 'kiosk', this)">
+                        <span class="step-number">5</span>
+                        <div class="step-content">
+                            <div class="step-title">Enter Visitor Details</div>
+                            <div class="step-description">Staff enters visitor information</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('93YQ4', 'Tenant Directory', 'dashboard', this)">
+                        <span class="step-number">6</span>
+                        <div class="step-content">
+                            <div class="step-title">Select Tenant/Host</div>
+                            <div class="step-description">Staff selects tenant to notify</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('huHVL', 'Host Approval', 'whatsapp', this)">
+                        <span class="step-number">7</span>
+                        <div class="step-content">
+                            <div class="step-title">Host Notification</div>
+                            <div class="step-description">System sends WhatsApp to host</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                        <span class="step-number">8</span>
+                        <div class="step-content">
+                            <div class="step-title">View Host Response</div>
+                            <div class="step-description">Staff sees host response on dashboard</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('NElml', 'No-Response Escalation', 'whatsapp', this)">
+                        <span class="step-number">9</span>
+                        <div class="step-content">
+                            <div class="step-title">Escalation</div>
+                            <div class="step-description">Host no-response escalation</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
+                        <span class="step-number">10</span>
+                        <div class="step-content">
+                            <div class="step-title">Log Check-In</div>
+                            <div class="step-description">Visitor check-in logged</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow E -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowE')">
+                    <span class="flow-badge">FLOW E</span>
+                    <h2 class="flow-title">WhatsApp Self-Service</h2>
+                    <span class="status-badge status-complete">✓</span>
+                    <button class="expand-toggle" id="toggleE">▼</button>
+                </div>
+                <p class="flow-description">
+                    Visitor-initiated check-in via WhatsApp (no kiosk hardware required). Scan QR placard to start conversation.
+                </p>
+                <div class="screen-sequence" id="flowE">
+                    <div class="screen-step" onclick="showScreen('RgJ3N', 'Walk-In Self Check-In', 'whatsapp', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Scan QR Placard</div>
+                            <div class="step-description">Visitor scans QR with phone camera</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('UY36a', 'Pre-Registered Confirmation', 'whatsapp', this)">
+                        <span class="step-number">2a</span>
+                        <div class="step-content">
+                            <div class="step-title">Pre-Registered Path</div>
+                            <div class="step-description">Auto-confirmation for pre-registered</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('RgJ3N', 'Walk-In Self Check-In', 'whatsapp', this)">
+                        <span class="step-number">2b</span>
+                        <div class="step-content">
+                            <div class="step-title">Walk-In Path</div>
+                            <div class="step-description">WhatsApp bot prompts for info</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('huHVL', 'Host Approval', 'whatsapp', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Host Notification</div>
+                            <div class="step-description">System notifies host via WhatsApp</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Real-Time Dashboard</div>
+                            <div class="step-description">Staff sees check-in with override capability</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notes-section">
+                    <div class="notes-title">💡 Key Innovation</div>
+                    <div class="notes-content">
+                        Eliminates need for lobby kiosk hardware. Visitors use their own phones—no app download, no hardware costs.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exit Flow -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowExit')">
+                    <span class="flow-badge">EXIT</span>
+                    <h2 class="flow-title">Check-Out Process</h2>
+                    <span class="status-badge status-complete">✓</span>
+                    <button class="expand-toggle" id="toggleExit">▼</button>
+                </div>
+                <p class="flow-description">
+                    Universal check-out flow for all visitor types.
+                </p>
+                <div class="screen-sequence" id="flowExit">
+                    <div class="screen-step" onclick="showScreen('A1SRI', 'Exit - Welcome', 'kiosk', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Exit Welcome</div>
+                            <div class="step-description">Visitor initiates check-out</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('FB5Er', 'Exit - Search & Checkout', 'dashboard', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Complete Checkout</div>
+                            <div class="step-description">Search visitor and log departure</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Log Updated</div>
+                            <div class="step-description">Departure logged with timestamp</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Panel: Screen Preview -->
+        <div class="right-panel">
+            <div class="screen-preview-container" id="screenPreview">
+                <div class="placeholder-screen">
+                    <div class="placeholder-icon">👈</div>
+                    <div class="placeholder-text">Click any step to view screen</div>
+                    <div class="placeholder-subtext">Interactive flow demonstration</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentActiveStep = null;
+
+        function toggleFlow(flowId) {
+            const sequence = document.getElementById(flowId);
+            const toggle = document.getElementById('toggle' + flowId.replace('flow', ''));
+
+            sequence.classList.toggle('collapsed');
+            toggle.classList.toggle('expanded');
+        }
+
+        function showScreen(screenId, screenName, screenType, element) {
+            // Remove active class from previous step
+            if (currentActiveStep) {
+                currentActiveStep.classList.remove('active');
+            }
+
+            // Add active class to clicked step
+            element.classList.add('active');
+            currentActiveStep = element;
+
+            const previewContainer = document.getElementById('screenPreview');
+
+            // Create screen info and image
+            previewContainer.innerHTML = `
+                <div class="screen-info">
+                    <div class="screen-name">${screenName}</div>
+                    <div class="screen-id-display">${screenId}</div>
+                </div>
+                <img src="screenshots/${screenId}.png"
+                     alt="${screenName}"
+                     class="screen-preview"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-screen" style="display:none;">
+                    <div class="placeholder-icon">🖼️</div>
+                    <div class="placeholder-text">Screen preview unavailable</div>
+                    <div class="placeholder-subtext">ID: ${screenId}</div>
+                </div>
+            `;
+        }
+
+        // Initialize all flows as expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            // All flows start expanded by default
+        });
+    </script>
+</body>
+</html>
