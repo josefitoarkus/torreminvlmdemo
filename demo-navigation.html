@@ -652,6 +652,166 @@
                 </div>
             </div>
 
+            <!-- Flow C -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowC')">
+                    <span class="flow-badge">FLOW C</span>
+                    <h2 class="flow-title">Delivery / Package Arrival</h2>
+                    <span class="status-badge status-complete">✓ Complete</span>
+                    <button class="expand-toggle" id="toggleC">▼</button>
+                </div>
+                <p class="flow-description">
+                    Fast-track flow for high-frequency deliveries. Courier logs package, recipient notified via WhatsApp.
+                </p>
+                <div class="screen-sequence" id="flowC">
+                    <div class="screen-step" onclick="showScreen('3d2hE', 'Check-In Form (delivery mode)', 'dashboard', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Select Delivery Mode</div>
+                            <div class="step-description">Staff selects delivery visitor type</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">⚠</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('e70Qy', 'Delivery Entry Form', 'dashboard', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Delivery Entry Form</div>
+                            <div class="step-description">Staff enters courier info, tracking number</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('IoyJK', 'Delivery Arrival Notification', 'whatsapp', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Recipient Notification</div>
+                            <div class="step-description">System sends WhatsApp to recipient</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Log Delivery</div>
+                            <div class="step-description">Delivery logged with timestamp</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">⚠</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('MbHBf', 'Delivery Status Dashboard', 'dashboard', this)">
+                        <span class="step-number">5</span>
+                        <div class="step-content">
+                            <div class="step-title">Mark as Collected</div>
+                            <div class="step-description">Staff marks package as collected by recipient</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow D -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowD')">
+                    <span class="flow-badge">FLOW D</span>
+                    <h2 class="flow-title">Recurring Vendor / Contractor</h2>
+                    <span class="status-badge status-complete">✓ Complete</span>
+                    <button class="expand-toggle" id="toggleD">▼</button>
+                </div>
+                <p class="flow-description">
+                    Fast check-in for pre-registered vendors with recurring access. System auto-fills vendor records.
+                </p>
+                <div class="screen-sequence" id="flowD">
+                    <div class="screen-step" onclick="showScreen('2lIF7', 'Lobby - Welcome', 'kiosk', this)">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <div class="step-title">Vendor Arrives</div>
+                            <div class="step-description">Vendor arrives at lobby</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('4YA2p', 'Frequent Visitor Search', 'kiosk', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Search Vendor</div>
+                            <div class="step-description">Staff searches vendor by name/company</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('3d2hE', 'Check-In Form (pre-filled)', 'dashboard', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Auto-Fill Vendor Record</div>
+                            <div class="step-description">System auto-fills vendor information</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">⚠</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('FfAOT', 'Vendor Access Control', 'dashboard', this)">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Vendor Access Control</div>
+                            <div class="step-description">Staff confirms service type, work order, floor/zone access</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
+                        <span class="step-number">5</span>
+                        <div class="step-content">
+                            <div class="step-title">Log Vendor Check-In</div>
+                            <div class="step-description">Vendor check-in logged</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('FB5Er', 'Exit - Search & Checkout', 'dashboard', this)">
+                        <span class="step-number">6</span>
+                        <div class="step-content">
+                            <div class="step-title">Vendor Check-Out</div>
+                            <div class="step-description">Vendor check-out logged on departure</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Flow E -->
             <div class="flow-section">
                 <div class="flow-header" onclick="toggleFlow('flowE')">
