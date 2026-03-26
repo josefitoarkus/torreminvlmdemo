@@ -16,17 +16,27 @@
 |------|-------------|-------------|-------------|-----------|--------|
 | 1 | Tenant initiates invitation via WhatsApp | WhatsApp | Case: Tenant Registers a Guest | `2ZfZA` | ✅ Exists |
 | 2 | System sends visitor WhatsApp with QR code | WhatsApp | Case: Pre-Registered Visitor QR Invitation | `Dts7e` | ✅ Exists |
-| 3 | Visitor scans QR at entrance | Lobby Kiosk | Lobby - QR Scan | `fBy7S` | ✅ Exists |
+| **3a** | **Path A: Visitor shows QR to lobby staff** | **Lobby Kiosk** | **Lobby - QR Scan** | **`fBy7S`** | **✅ Exists** |
+| **3b-1** | **Path B: Visitor scans printed QR poster at entrance** | **Physical Poster** | **Printed QR Banner - Entrance** | **`P4AxW`** | **✅ Exists** |
+| **3b-2** | **Path B: Mobile web page opens asking for phone number** | **Mobile Web** | **Mobile: Phone Capture Screen** | **`vZ2UY`** | **✅ Exists** |
+| **3b-3** | **Path B: WhatsApp opens with check-in confirmation button** | **WhatsApp** | **Pre-Registered Entrance QR - Tap to Confirm** | **`fPemZ`** | **✅ Exists** |
 | 4 | System confirms scan via WhatsApp | WhatsApp | Case: Pre-Registered QR Scan Confirmation | `UY36a` | ✅ Exists |
 | 5 | Staff dashboard updates with visitor | Dashboard | Staff Dashboard | `CWDOp` | ✅ Exists |
 | 6 | Badge/pass confirmation shown | Lobby Kiosk | Lobby - Badge Confirmation | `Z7pa7` | ✅ Exists |
 | 7 | Host receives WhatsApp notification | WhatsApp | Case: Host Approval for Walk-In Visitor | `huHVL` | ⚠️ Reusable |
 
-**Status:** ✅ **COMPLETE** - All required screens exist
+**Status:** ✅ **COMPLETE** - All required screens exist including both check-in paths
 
 **Notes:**
+- **Two check-in paths available:**
+  - **Path A:** Visitor shows QR code to lobby staff at kiosk (step 3a)
+  - **Path B:** Visitor scans printed QR poster at entrance (steps 3b-1 → 3b-2 → 3b-3):
+    1. Scans entrance QR poster with phone camera
+    2. Mobile web page opens asking for phone number verification
+    3. WhatsApp opens with personalized check-in confirmation button
+- Both paths converge at step 4 (WhatsApp confirmation receipt)
 - Host approval WhatsApp screen exists but is named for walk-in flow (can be reused)
-- Could benefit from a dedicated "Staff Dashboard - Visitor Arrival View" but existing dashboard works
+- Path B enables contactless check-in without staff interaction
 
 ---
 

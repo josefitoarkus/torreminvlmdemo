@@ -456,14 +456,50 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('fBy7S', 'Lobby - QR Scan', 'kiosk', this)">
-                        <span class="step-number">3</span>
+                    <div class="screen-step" onclick="showScreen('fBy7S', 'Lobby - QR Scan (Path A)', 'kiosk', this)">
+                        <span class="step-number">3a</span>
                         <div class="step-content">
-                            <div class="step-title">Visitor Scans QR</div>
-                            <div class="step-description">Visitor scans QR at entrance</div>
+                            <div class="step-title">Path A: Kiosk QR Scan</div>
+                            <div class="step-description">Visitor shows QR to lobby staff at kiosk</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('P4AxW', 'Printed QR Poster at Entrance', 'kiosk', this)">
+                        <span class="step-number">3b-1</span>
+                        <div class="step-content">
+                            <div class="step-title">Path B: Entrance QR Poster</div>
+                            <div class="step-description">Visitor scans printed QR poster at entrance</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('vZ2UY', 'Mobile Phone Capture Screen', 'whatsapp', this)">
+                        <span class="step-number">3b-2</span>
+                        <div class="step-content">
+                            <div class="step-title">Path B: Enter Phone Number</div>
+                            <div class="step-description">Mobile web page opens asking for phone verification</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">Mobile</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('fPemZ', 'WhatsApp Check-in Confirmation', 'whatsapp', this)">
+                        <span class="step-number">3b-3</span>
+                        <div class="step-content">
+                            <div class="step-title">Path B: Confirm Arrival</div>
+                            <div class="step-description">WhatsApp opens, visitor taps button to confirm arrival</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
