@@ -41,6 +41,10 @@ All screens are designed in this Pencil file and can only be read/modified using
 | `NElml` | Case: Host No-Response Escalation | Flow B, step 9 |
 | `IoyJK` | Case: Delivery Arrival Notification | (Flow C - not in current demo) |
 | `jD5Kl` | Case: Blocklist Match Security Alert | (Edge case - not in main flows) |
+| `zTtwN` | Case: Tenant Bot User Management | Flow -A, Method B interface |
+| `O0Akq` | Case: Guest Missing Phone Number | Flow A+, step 1 |
+| `LXOub` | Case: Guest Missing Full Name | Flow A+, step 2 |
+| `f7iNU` | Case: Guest Registration Field by Field | Flow A+, step 3 |
 
 ### Dashboard Screens (1280px wide, 800px tall)
 | Screen ID | Screen Name | Used In Flow |
@@ -51,6 +55,8 @@ All screens are designed in this Pencil file and can only be read/modified using
 | `zrVM4` | Visitor Log | Flow B, step 10; Exit Flow, step 3 |
 | `FB5Er` | Exit - Search & Checkout | Exit Flow, step 2 |
 | `EPAKj` | Admin - Login | (System screen - not in flows) |
+| `W9EcL` | Bot User Permissions - Dashboard | Flow -A, Method A |
+| `w5KgW` | Bot User Management - Dashboard | Flow -A, Method B |
 
 ### Lobby Kiosk Screens (1280px wide, 800px tall)
 | Screen ID | Screen Name | Used In Flow |
@@ -275,7 +281,8 @@ mcp__pencil__export_nodes({
     "CWDOp", "3d2hE", "93YQ4", "zrVM4", "2lIF7", "FJEZG",
     "hR4jr", "Z7pa7", "nE6UY", "SJIyt", "gy67C", "fBy7S",
     "4YA2p", "A1SRI", "FB5Er", "EPAKj", "2ZfZA", "Dts7e",
-    "UY36a", "RgJ3N", "huHVL", "NElml", "IoyJK", "jD5Kl"
+    "UY36a", "RgJ3N", "huHVL", "NElml", "IoyJK", "jD5Kl",
+    "W9EcL", "w5KgW", "zTtwN", "O0Akq", "LXOub", "f7iNU"
   ],
   format: "png",
   scale: 2

@@ -106,14 +106,14 @@ Based on completeness and impact, present flows in this order:
 
 | Flow | Status | Screens Exist | Screens Missing | Demo Ready? |
 |------|--------|---------------|-----------------|-------------|
-| Flow A - Pre-Registered | ✅ Complete | 7/7 | 0 | ✅ Yes |
-| Flow B - Walk-In | ✅ Complete | 10/10 | 0 | ✅ Yes |
+| Flow A - Pre-Registered | ✅ Complete | 9/9 | 0 | ✅ Yes |
+| Flow B - Walk-In | ✅ Complete | 12/12 | 0 | ✅ Yes |
 | Flow C - Delivery | ⚠️ Partial | 3/5 | 2 | ⚠️ With notes |
-| Flow D - Vendor | ⚠️ Partial | 5/6 | 1 | ✅ Yes |
+| Flow D - Vendor | ✅ Complete | 7/7 | 0 | ✅ Yes |
 | Flow E - WhatsApp Self | ✅ Complete | 5/5 | 0 | ✅ Yes |
-| Exit Flow | ✅ Complete | 3/3 | 0 | ✅ Yes |
+| Exit Flow | ✅ Complete | 5/5 | 0 | ✅ Yes |
 
-**Total:** 33 of 36 steps are fully demonstrable (92% coverage)
+**Total:** 49 of 52 steps are fully demonstrable (94% coverage)
 
 ## 🎨 Design File Reference
 
@@ -135,7 +135,8 @@ All screens referenced in these materials are located in:
 - `jD5Kl` - Blocklist Match Security Alert
 
 **Dashboard Screens:**
-- `CWDOp` - Staff Dashboard
+- `CWDOp` - Staff Dashboard (with QR Status column)
+- `LZYS1` - Guard Notification Center (Mobile)
 - `3d2hE` - Check-In Form
 - `93YQ4` - Tenant Directory
 - `zrVM4` - Visitor Log

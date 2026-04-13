@@ -420,6 +420,56 @@
                 <p class="subtitle">Click any step to preview screen</p>
             </header>
 
+            <!-- Flow -A -->
+            <div class="flow-section">
+                <div class="flow-header" onclick="toggleFlow('flowNegA')">
+                    <span class="flow-badge">FLOW -A</span>
+                    <h2 class="flow-title">"Bot User Registration"</h2>
+                    <span class="status-badge status-complete">✓</span>
+                    <button class="expand-toggle" id="toggleNegA">▼</button>
+                </div>
+                <p class="flow-description">
+                    Where tenants manage which users are authorized to interact with the WhatsApp bot system.
+                </p>
+                <div class="screen-sequence" id="flowNegA">
+                    <div class="screen-step" onclick="showScreen('w5KgW', 'Bot User Management - Dashboard', 'dashboard', this)">
+                        <span class="step-number">A1</span>
+                        <div class="step-content">
+                            <div class="step-title">Method A: User Management Interface</div>
+                            <div class="step-description">Full dashboard for adding, editing and managing bot users</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('W9EcL', 'Bot User Permissions - Dashboard', 'dashboard', this)">
+                        <span class="step-number">A2</span>
+                        <div class="step-content">
+                            <div class="step-title">Method B: Grant Bot Permissions</div>
+                            <div class="step-description">Dashboard interface to grant WhatsApp bot permissions by phone</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('zTtwN', 'Tenant Bot User Management', 'whatsapp', this)">
+                        <span class="step-number">A3</span>
+                        <div class="step-content">
+                            <div class="step-title">WhatsApp Bot Commands</div>
+                            <div class="step-description">Natural language bot interaction for user management</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Flow A -->
             <div class="flow-section">
                 <div class="flow-header" onclick="toggleFlow('flowA')">
@@ -429,14 +479,62 @@
                     <button class="expand-toggle" id="toggleA">▼</button>
                 </div>
                 <p class="flow-description">
-                    Gold-standard experience for scheduled meetings. Tenant invites via WhatsApp, visitor receives QR code, arrives and checks in seamlessly.
+                    Gold-standard experience for scheduled meetings. Tenant invites via WhatsApp, bot intelligently handles missing guest data with natural language conversation, visitor receives QR code, arrives and checks in seamlessly.
                 </p>
                 <div class="screen-sequence" id="flowA">
                     <div class="screen-step" onclick="showScreen('2ZfZA', 'Case: Tenant Registers a Guest', 'whatsapp', this)">
-                        <span class="step-number">1</span>
+                        <span class="step-number">1a</span>
                         <div class="step-content">
-                            <div class="step-title">Tenant Registers a Guest</div>
-                            <div class="step-description">Tenant initiates invitation via WhatsApp</div>
+                            <div class="step-title">Route A: Guest Exists - Successful Registration</div>
+                            <div class="step-description">Tenant registers known guest, system confirms and sends QR</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('1D8Gz', 'Case: Guest Doesn\'t Exist - Registration', 'whatsapp', this)">
+                        <span class="step-number">1b</span>
+                        <div class="step-content">
+                            <div class="step-title">Route B: Guest Doesn't Exist - Missing Surname</div>
+                            <div class="step-description">Bot asks for missing guest surname: "¿Podrías darme el apellido de Ana?"</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('O0Akq', 'Guest Missing Phone Number', 'whatsapp', this)">
+                        <span class="step-number">1b-1</span>
+                        <div class="step-content">
+                            <div class="step-title">Route B Example: Missing Phone</div>
+                            <div class="step-description">Bot requests phone number when guest data incomplete</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('LXOub', 'Guest Missing Full Name', 'whatsapp', this)">
+                        <span class="step-number">1b-2</span>
+                        <div class="step-content">
+                            <div class="step-title">Route B Example: Missing Full Name</div>
+                            <div class="step-description">Bot requests complete name including surname</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('f7iNU', 'Guest Registration Field by Field', 'whatsapp', this)">
+                        <span class="step-number">1b-3</span>
+                        <div class="step-content">
+                            <div class="step-title">Route B Example: Field-by-Field</div>
+                            <div class="step-description">Complete natural language conversation collecting info step by step</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-whatsapp">WhatsApp</span>
@@ -461,6 +559,42 @@
                         <div class="step-content">
                             <div class="step-title">Path A: Kiosk QR Scan</div>
                             <div class="step-description">Visitor shows QR to lobby staff at kiosk</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('QrAcc1', 'QR Status - Accepted', 'kiosk', this)">
+                        <span class="step-number">3a-1</span>
+                        <div class="step-content">
+                            <div class="step-title">QR Aceptado</div>
+                            <div class="step-description">Código QR validado correctamente - acceso autorizado</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Lobby - Badge Confirmation', 'kiosk', this)">
+                        <span class="step-number">3a-2</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Emitida (Path A)</div>
+                            <div class="step-description">Staff emite badge físico al visitante</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('QrRej1', 'QR Status - Rejected', 'kiosk', this)">
+                        <span class="step-number">3a-3</span>
+                        <div class="step-content">
+                            <div class="step-title">QR Rechazado</div>
+                            <div class="step-description">Código QR inválido o expirado - acceso denegado</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-kiosk">Kiosk</span>
@@ -504,6 +638,18 @@
                         </div>
                     </div>
 
+                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Lobby - Badge Confirmation', 'kiosk', this)">
+                        <span class="step-number">3b-4</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Emitida (Path B)</div>
+                            <div class="step-description">Sistema contacta lobby - staff emite badge físico</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
                     <div class="screen-step" onclick="showScreen('UY36a', 'QR Scan Confirmation', 'whatsapp', this)">
                         <span class="step-number">4</span>
                         <div class="step-content">
@@ -528,20 +674,21 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Lobby - Badge Confirmation', 'kiosk', this)">
-                        <span class="step-number">6</span>
+                    <div class="screen-step" onclick="showScreen('LZYS1', 'Guard Notification Center', 'whatsapp', this)">
+                        <span class="step-number">5b</span>
                         <div class="step-content">
-                            <div class="step-title">Badge Issued</div>
-                            <div class="step-description">Badge/pass confirmation shown to visitor</div>
+                            <div class="step-title">Centro de Notificaciones</div>
+                            <div class="step-description">Panel móvil en tiempo real para guardias de seguridad</div>
                         </div>
                         <div class="step-meta">
-                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="screen-type type-whatsapp">Mobile</span>
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
 
+
                     <div class="screen-step" onclick="showScreen('huHVL', 'Host Approval', 'whatsapp', this)">
-                        <span class="step-number">7</span>
+                        <span class="step-number">6</span>
                         <div class="step-content">
                             <div class="step-title">Host Notification</div>
                             <div class="step-description">Host receives WhatsApp with action buttons</div>
@@ -551,50 +698,35 @@
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
+
+
                 </div>
             </div>
+
+
 
             <!-- Flow B -->
             <div class="flow-section">
                 <div class="flow-header" onclick="toggleFlow('flowB')">
                     <span class="flow-badge">FLOW B</span>
-                    <h2 class="flow-title">Walk-In Visitor</h2>
+                    <h2 class="flow-title">Walk-In Visitor (Modified)</h2>
                     <span class="status-badge status-complete">✓</span>
                     <button class="expand-toggle" id="toggleB">▼</button>
                 </div>
                 <p class="flow-description">
-                    Handles visitors arriving without prior arrangement. Staff manually registers and notifies host.
+                    Two paths: Self-service kiosk OR Staff-assisted check-in. Both require manual tenant entry for security.
                 </p>
+                
+                <!-- Path 1: Self-Service -->
+                <div class="path-header">
+                    <h3>Path 1: Self-Service Kiosk</h3>
+                </div>
                 <div class="screen-sequence" id="flowB">
                     <div class="screen-step" onclick="showScreen('2lIF7', 'Lobby - Welcome', 'kiosk', this)">
                         <span class="step-number">1</span>
                         <div class="step-content">
                             <div class="step-title">Visitor Arrives</div>
-                            <div class="step-description">Visitor arrives at lobby</div>
-                        </div>
-                        <div class="step-meta">
-                            <span class="screen-type type-kiosk">Kiosk</span>
-                            <span class="status-icon">✓</span>
-                        </div>
-                    </div>
-
-                    <div class="screen-step" onclick="showScreen('3d2hE', 'Check-In Form', 'dashboard', this)">
-                        <span class="step-number">2</span>
-                        <div class="step-content">
-                            <div class="step-title">Staff Opens Check-In</div>
-                            <div class="step-description">Staff opens check-in interface</div>
-                        </div>
-                        <div class="step-meta">
-                            <span class="screen-type type-dashboard">Dashboard</span>
-                            <span class="status-icon">✓</span>
-                        </div>
-                    </div>
-
-                    <div class="screen-step" onclick="showScreen('4YA2p', 'Frequent Visitor Search', 'kiosk', this)">
-                        <span class="step-number">3</span>
-                        <div class="step-content">
-                            <div class="step-title">Search Visitor</div>
-                            <div class="step-description">Staff searches for returning visitor</div>
+                            <div class="step-description">Visitor touches kiosk to start</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-kiosk">Kiosk</span>
@@ -603,10 +735,52 @@
                     </div>
 
                     <div class="screen-step" onclick="showScreen('FJEZG', 'Method Selection', 'kiosk', this)">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <div class="step-title">Select Check-In Method</div>
+                            <div class="step-description">Visitor chooses registration method</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="route-split">
+                        <span class="route-label">Option 3a</span>
+                        <div class="screen-step" onclick="showScreen('hR4jr', 'Visitor Info Entry', 'kiosk', this)">
+                            <span class="step-number">3a</span>
+                            <div class="step-content">
+                                <div class="step-title">Registrar con Datos</div>
+                                <div class="step-description">Visitor enters their information</div>
+                            </div>
+                            <div class="step-meta">
+                                <span class="screen-type type-kiosk">Kiosk</span>
+                                <span class="status-icon">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-split">
+                        <span class="route-label">Option 3b</span>
+                        <div class="screen-step" onclick="showScreen('4YA2p', 'Frequent Visitor', 'kiosk', this)">
+                            <span class="step-number">3b</span>
+                            <div class="step-content">
+                                <div class="step-title">Visitante Frecuente</div>
+                                <div class="step-description">Returning visitor searches their name</div>
+                            </div>
+                            <div class="step-meta">
+                                <span class="screen-type type-kiosk">Kiosk</span>
+                                <span class="status-icon">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('KIh1w', 'Manual Tenant Entry', 'kiosk', this)">
                         <span class="step-number">4</span>
                         <div class="step-content">
-                            <div class="step-title">Select Visitor Type</div>
-                            <div class="step-description">Staff selects visitor type</div>
+                            <div class="step-title">Manual Tenant Entry</div>
+                            <div class="step-description">Visitor manually types who they'll visit (security requirement)</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-kiosk">Kiosk</span>
@@ -614,23 +788,41 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('hR4jr', 'Visitor Info Entry', 'kiosk', this)">
+                    <div class="screen-step" onclick="showScreen('jD5Kl', 'Security Alert', 'whatsapp', this)">
                         <span class="step-number">5</span>
                         <div class="step-content">
-                            <div class="step-title">Enter Visitor Details</div>
-                            <div class="step-description">Staff enters visitor information</div>
+                            <div class="step-title">Security Alert</div>
+                            <div class="step-description">System sends security notification if needed</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Badge Confirmation', 'kiosk', this)">
+                        <span class="step-number">6</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Issued</div>
+                            <div class="step-description">System issues visitor badge</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-kiosk">Kiosk</span>
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="screen-step" onclick="showScreen('93YQ4', 'Tenant Directory', 'dashboard', this)">
-                        <span class="step-number">6</span>
+                <!-- Path 2: Staff-Assisted -->
+                <div class="path-header" style="margin-top: 30px;">
+                    <h3>Path 2: Staff-Assisted</h3>
+                </div>
+                <div class="screen-sequence">
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                        <span class="step-number">1</span>
                         <div class="step-content">
-                            <div class="step-title">Select Tenant/Host</div>
-                            <div class="step-description">Staff selects tenant to notify</div>
+                            <div class="step-title">Staff Opens Dashboard</div>
+                            <div class="step-description">Staff accesses check-in dashboard</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-dashboard">Dashboard</span>
@@ -638,11 +830,53 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('huHVL', 'Host Approval', 'whatsapp', this)">
-                        <span class="step-number">7</span>
+                    <div class="route-split">
+                        <span class="route-label">Option 2a</span>
+                        <div class="screen-step" onclick="showScreen('GUUCV', 'Manual Registration', 'dashboard', this)">
+                            <span class="step-number">2a</span>
+                            <div class="step-content">
+                                <div class="step-title">Manual Registration</div>
+                                <div class="step-description">Staff enters visitor data manually</div>
+                            </div>
+                            <div class="step-meta">
+                                <span class="screen-type type-dashboard">Dashboard</span>
+                                <span class="status-icon">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-split">
+                        <span class="route-label">Option 2b</span>
+                        <div class="screen-step" onclick="showScreen('hpXEp', 'ID Capture', 'dashboard', this)">
+                            <span class="step-number">2b</span>
+                            <div class="step-content">
+                                <div class="step-title">ID Document Capture</div>
+                                <div class="step-description">Staff scans visitor ID document (optional)</div>
+                            </div>
+                            <div class="step-meta">
+                                <span class="screen-type type-dashboard">Dashboard</span>
+                                <span class="status-icon">✓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('XpH85', 'Staff Tenant Search', 'dashboard', this)">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <div class="step-title">Search & Select Tenant</div>
+                            <div class="step-description">Staff searches registered tenants with filters and selects host</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('huHVL', 'Host Notification', 'whatsapp', this)">
+                        <span class="step-number">4</span>
                         <div class="step-content">
                             <div class="step-title">Host Notification</div>
-                            <div class="step-description">System sends WhatsApp to host</div>
+                            <div class="step-description">System sends WhatsApp to host for approval</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-whatsapp">WhatsApp</span>
@@ -650,35 +884,41 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
-                        <span class="step-number">8</span>
+                    <div class="screen-step" onclick="showScreen('jD5Kl', 'Security Alert', 'whatsapp', this)">
+                        <span class="step-number">5</span>
                         <div class="step-content">
-                            <div class="step-title">View Host Response</div>
-                            <div class="step-description">Staff sees host response on dashboard</div>
+                            <div class="step-title">Security Alert</div>
+                            <div class="step-description">System sends security notification if needed</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('ExxP9', 'Badge Authorization Dashboard', 'dashboard', this)">
+                        <span class="step-number">6</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Authorization</div>
+                            <div class="step-description">Staff receives host approval and issues badge</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-dashboard">Dashboard</span>
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="screen-step" onclick="showScreen('NElml', 'No-Response Escalation', 'whatsapp', this)">
-                        <span class="step-number">9</span>
-                        <div class="step-content">
-                            <div class="step-title">Escalation</div>
-                            <div class="step-description">Host no-response escalation</div>
-                        </div>
-                        <div class="step-meta">
-                            <span class="screen-type type-whatsapp">WhatsApp</span>
-                            <span class="status-icon">✓</span>
-                        </div>
-                    </div>
-
+                <!-- Common Final Step -->
+                <div class="path-header" style="margin-top: 30px;">
+                    <h3>Common Final Step</h3>
+                </div>
+                <div class="screen-sequence">
                     <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
-                        <span class="step-number">10</span>
+                        <span class="step-number">7</span>
                         <div class="step-content">
                             <div class="step-title">Log Check-In</div>
-                            <div class="step-description">Visitor check-in logged</div>
+                            <div class="step-description">Visit logged in system</div>
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-dashboard">Dashboard</span>
@@ -822,6 +1062,18 @@
                         </div>
                     </div>
 
+                    <div class="screen-step" onclick="showScreen('Z7pa7', 'Lobby - Badge Confirmation', 'kiosk', this)">
+                        <span class="step-number">4a</span>
+                        <div class="step-content">
+                            <div class="step-title">Badge Emitida (Proveedor)</div>
+                            <div class="step-description">Acceso aprobado - staff emite badge con permisos de zona</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-kiosk">Kiosk</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
                     <div class="screen-step" onclick="showScreen('zrVM4', 'Visitor Log', 'dashboard', this)">
                         <span class="step-number">5</span>
                         <div class="step-content">
@@ -830,6 +1082,18 @@
                         </div>
                         <div class="step-meta">
                             <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('LZYS1', 'Guard Notification Center', 'whatsapp', this)">
+                        <span class="step-number">5a</span>
+                        <div class="step-content">
+                            <div class="step-title">Notificación Acceso Autorizado</div>
+                            <div class="step-description">Guardia confirma proveedor autorizado en sistema</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">Mobile</span>
                             <span class="status-icon">✓</span>
                         </div>
                     </div>
@@ -908,8 +1172,32 @@
                         </div>
                     </div>
 
-                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                    <div class="screen-step" onclick="showScreen('NElml', 'Host No-Response Escalation', 'whatsapp', this)">
+                        <span class="step-number">3a</span>
+                        <div class="step-content">
+                            <div class="step-title">Host No-Response Escalation</div>
+                            <div class="step-description">Automatic escalation when host doesn't respond</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('UY36a', 'Visitor Confirmation', 'whatsapp', this)">
                         <span class="step-number">4</span>
+                        <div class="step-content">
+                            <div class="step-title">Visitor Receives Confirmation</div>
+                            <div class="step-description">WhatsApp confirmation with check-in details</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">WhatsApp</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
+                        <span class="step-number">5</span>
                         <div class="step-content">
                             <div class="step-title">Real-Time Dashboard</div>
                             <div class="step-description">Staff sees check-in with override capability</div>
@@ -954,6 +1242,30 @@
                     </div>
 
                     <div class="screen-step" onclick="showScreen('FB5Er', 'Exit - Search & Checkout', 'dashboard', this)">
+                        <span class="step-number">2a</span>
+                        <div class="step-content">
+                            <div class="step-title">Process Checkout</div>
+                            <div class="step-description">Staff processes visitor departure</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-dashboard">Dashboard</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('LZYS1', 'Guard Notification Center', 'whatsapp', this)">
+                        <span class="step-number">2b</span>
+                        <div class="step-content">
+                            <div class="step-title">Confirmación de Salida</div>
+                            <div class="step-description">Guardia recibe alerta de visitante saliendo</div>
+                        </div>
+                        <div class="step-meta">
+                            <span class="screen-type type-whatsapp">Mobile</span>
+                            <span class="status-icon">✓</span>
+                        </div>
+                    </div>
+
+                    <div class="screen-step" onclick="showScreen('CWDOp', 'Staff Dashboard', 'dashboard', this)">
                         <span class="step-number">2</span>
                         <div class="step-content">
                             <div class="step-title">Complete Checkout</div>
