@@ -33,10 +33,11 @@ All screens are designed in this Pencil file and can only be read/modified using
 | `2ZfZA` | Case: Tenant Registers a Guest | Flow A, step 1 |
 | `Dts7e` | Case: Pre-Registered Visitor QR Invitation | Flow A, step 2 |
 | `P4AxW` | Printed QR Banner - Entrance | Flow A, step 3b-1 (800×400) |
+| `pL4crD` | Self-Service QR Placard (Torre Mind Visitor Check-In) | Flow E, step 1 |
 | `vZ2UY` | Mobile: Phone Capture Screen | Flow A, step 3b-2 |
 | `fPemZ` | Case: Pre-Registered Entrance QR - Tap to Confirm | Flow A, step 3b-3 |
 | `UY36a` | Case: Pre-Registered QR Scan Confirmation | Flow A, step 4; Flow E, steps 2a & 4 |
-| `RgJ3N` | Case: Walk-In Visitor Self Check-In | Flow E, steps 1 & 2b |
+| `RgJ3N` | Case: Walk-In Visitor Self Check-In | Flow E, step 2b |
 | `huHVL` | Case: Host Approval for Walk-In Visitor | Flow A, step 7; Flow B, step 7; Flow E, step 3 |
 | `NElml` | Case: Host No-Response Escalation | Flow B, step 9 |
 | `IoyJK` | Case: Delivery Arrival Notification | (Flow C - not in current demo) |

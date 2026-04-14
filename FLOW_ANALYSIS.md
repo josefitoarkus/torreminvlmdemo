@@ -186,7 +186,7 @@
 
 | Step | Description | Screen Type | Screen Name | Screen ID | Status |
 |------|-------------|-------------|-------------|-----------|--------|
-| 1 | Visitor scans QR placard at entrance | WhatsApp | Case: Walk-In Visitor Self Check-In | `RgJ3N` | ✅ Exists |
+| 1 | Visitor scans QR placard at entrance | WhatsApp | Self-Service QR Placard (Torre Mind Visitor Check-In) | `pL4crD` | ✅ Exists |
 | 2a | Pre-registered: Scan sends auto-confirmation | WhatsApp | Case: Pre-Registered QR Scan Confirmation | `UY36a` | ✅ Exists |
 | 2b | Walk-in: WhatsApp bot prompts for info | WhatsApp | Case: Walk-In Visitor Self Check-In | `RgJ3N` | ✅ Exists |
 | 3 | System notifies host via WhatsApp | WhatsApp | Case: Host Approval for Walk-In Visitor | `huHVL` | ✅ Exists |
